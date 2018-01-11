@@ -33,3 +33,9 @@ services:
       - "10080:3000"
       - "10022:22"
   
+
+# - startup.env
+# POSTGRES_USER=admin
+# POSTGRES_PASSWORD=brad
+# PGDATA=/var/lib/postgresql/data
+# POSTGRES_DB=gogs
