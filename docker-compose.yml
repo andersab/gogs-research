@@ -1,0 +1,35 @@
+version: '3.1'
+
+networks:
+  gogs:
+
+services:
+  gogs-db:
+    image: postgres
+    container_name: gogs-db
+    networks:
+      - gogs
+    restart: always
+    env_file:
+      - startup.env
+    volumes:
+      - ./data/gogs-db:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
+    
+  gogs:
+    image: gogs/gogs
+    container_name: gogs
+    networks:
+      - gogs
+    restart: always
+    volumes:
+      - ./data/gogs:/data
+    links:
+      - gogs-db
+    depends_on:
+      - gogs-db
+    ports:
+      - "10080:3000"
+      - "10022:22"
+  
